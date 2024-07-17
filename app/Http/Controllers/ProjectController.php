@@ -65,8 +65,7 @@ class ProjectController extends Controller
     public function update(UpdateProjectRequest $request, Project $project)
     {
         $data = $request->validated();
-        $data['artists'] = array_map('trim', explode(',', $data['artists']));
-        $data['writers'] = array_map('trim', explode(',', $data['writers']));
+        $data['images'] = array_map('trim', explode(',', $data['images']));
 
         $project->update($data);
 
