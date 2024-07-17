@@ -1,1 +1,8 @@
+/*resources/scss/app.scss*/
+@use "./partials/variables";
+@use "./partials/common";
+@use "./partials/layout";
+@use "./partials/utility";
+@use "./partials/card";
+
 @import "~bootstrap/scss/bootstrap";

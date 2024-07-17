@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Project;
+use App\Http\Requests\StoreProjectRequest;
+use App\Http\Requests\UpdateProjectRequest;
 
 class ProjectController extends Controller
 {
@@ -11,7 +14,11 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'projects' => Project::all(),
+        ];
+
+        return view('projects.index', compact('data'));
     }
 
     /**
@@ -19,46 +26,60 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('project.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
-        //
+
+        $data = $request->validated();
+        $data['images'] = array_map('trim', explode(',', $data['images']));
+        Project::create($data);
+
+        return redirect()->route('project.index');
     }
+
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Project $project)
     {
-        //
+        return view('projects.show', compact('project'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Project $project)
     {
-        //
+        return view('projects.edit', compact('project'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $data = $request->validated();
+        $data['artists'] = array_map('trim', explode(',', $data['artists']));
+        $data['writers'] = array_map('trim', explode(',', $data['writers']));
+
+        $project->update($data);
+
+        return redirect()->route('projects.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        return redirect()->route('projects.index');
     }
 }
