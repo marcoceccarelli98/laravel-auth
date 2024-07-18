@@ -4,9 +4,9 @@
 
 @section('content')
     <section>
-        {{-- <div class="add-project">
-        <a class="btn btn-primary" href="{{ route('projects.create') }}">ADD NEW project</a>
-    </div> --}}
+        <div class="add-project">
+            <a class="btn btn-primary" href="{{ route('projects.create') }}">ADD NEW PROJECT</a>
+        </div>
         <div class="container">
             <div class="projects-list">
                 @foreach ($data['projects'] as $project)

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
@@ -18,7 +19,7 @@ class ProjectController extends Controller
             'projects' => Project::all(),
         ];
 
-        return view('projects.index', compact('data'));
+        return view('admin.projects.index', compact('data'));
     }
 
     /**
@@ -26,7 +27,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('project.create');
+        return view('admin.projects.create');
     }
 
     /**
@@ -39,7 +40,7 @@ class ProjectController extends Controller
         $data['images'] = array_map('trim', explode(',', $data['images']));
         Project::create($data);
 
-        return redirect()->route('project.index');
+        return redirect()->route('home');
     }
 
 
@@ -48,7 +49,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return view('projects.show', compact('project'));
+        return view('admin.projects.show', compact('project'));
     }
 
     /**
@@ -56,7 +57,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('projects.edit', compact('project'));
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -69,7 +70,7 @@ class ProjectController extends Controller
 
         $project->update($data);
 
-        return redirect()->route('projects.index');
+        return redirect()->route('home');
     }
 
     /**
@@ -79,6 +80,6 @@ class ProjectController extends Controller
     {
         $project->delete();
 
-        return redirect()->route('projects.index');
+        return redirect()->route('home');
     }
 }

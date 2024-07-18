@@ -20,6 +20,9 @@ Route::get('/', [PageController::class, 'index'])->name('home');
 
 Route::resource('projects', ProjectController::class);
 
+// Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
+// Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
