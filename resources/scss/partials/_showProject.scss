@@ -1,0 +1,16 @@
+@import "./variables";
+
+.image-container {
+    width: 600px;
+    height: 600px;
+    overflow: hidden;
+    background-color: green;
+    display: flex;
+    // justify-content: center;
+    align-items: start;
+    img {
+        object-fit: cover;
+        width: 100%;
+        text-align: center;
+    }
+}
