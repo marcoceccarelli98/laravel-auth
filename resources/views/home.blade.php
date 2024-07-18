@@ -4,9 +4,11 @@
 
 @section('content')
     <section>
-        <div class="add-project">
-            <a class="btn btn-primary" href="{{ route('projects.create') }}">ADD NEW PROJECT</a>
-        </div>
+        @if (auth()->check())
+            <div class="add-project">
+                <a class="btn btn-primary" href="{{ route('projects.create') }}">ADD NEW PROJECT</a>
+            </div>
+        @endif
         <div class="container">
             <div class="projects-list">
                 @foreach ($data['projects'] as $project)

@@ -25,14 +25,17 @@
                             @endif
                         @endif
                     </div>
-                    <div class="mt-5">
-                        <a href="{{ route('projects.edit', $project->id) }}" class="btn btn-primary mx-2"><i
-                                class="fas fa-pen"></i></a>
-                        <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-danger" type="submit">
-                            <i class="fas fa-trash-can"></i>
-                        </button>
 
-                    </div>
+                    @if (auth()->check())
+                        <div class="mt-5">
+                            <a href="{{ route('projects.edit', $project->id) }}" class="btn btn-primary mx-2"><i
+                                    class="fas fa-pen"></i></a>
+                            <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-danger"
+                                type="submit">
+                                <i class="fas fa-trash-can"></i>
+                            </button>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
