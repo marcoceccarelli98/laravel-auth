@@ -21,32 +21,34 @@
                 @method('PUT')
                 <div class="text-white form-group">
                     <label for="title">Titolo</label>
-                    <input type="text" name="title" id="title" class="form-control" value="{{ $project->title }}"
-                        required>
+                    <input type="text" name="title" id="title" class="form-control"
+                        value="{{ old('title', $project->title) }}" required>
                 </div>
                 <div class="text-white mt-3 form-group">
                     <label for="description">Descrizione</label>
-                    <textarea name="description" id="description" class="form-control" required>{{ $project->description }}</textarea>
+                    <textarea name="description" id="description" class="form-control" required>{{ old('description', $project->description) }}</textarea>
                 </div>
                 <div class="text-white mt-3 form-group">
                     <label for="status">Status</label>
                     <select name="status" id="status" class="form-control" required>
-                        <option value="Done" {{ $project->status == 'Done' ? 'selected' : '' }}>Done</option>
-                        <option value="WIP" {{ $project->status == 'WIP' ? 'selected' : '' }}>WIP</option>
-                        <option value="To Do" {{ $project->status == 'To Do' ? 'selected' : '' }}>To Do</option>
+                        <option value="Done" {{ old('status', $project->status) == 'Done' ? 'selected' : '' }}>Done
+                        </option>
+                        <option value="WIP" {{ old('status', $project->status) == 'WIP' ? 'selected' : '' }}>WIP</option>
+                        <option value="To Do" {{ old('status', $project->status) == 'To Do' ? 'selected' : '' }}>To Do
+                        </option>
                     </select>
                 </div>
                 @if ($project->status != 'To Do')
                     <div class="text-white mt-3 form-group">
                         <label for="start_date">Data Inizio</label>
                         <input type="date" name="start_date" id="start_date" class="form-control"
-                            value="{{ $project->start_date }}" required>
+                            value="{{ old('start_date', $project->start_date) }}" required>
                     </div>
                     @if ($project->status != 'WIP')
                         <div class="text-white mt-3 form-group">
                             <label for="end_date">Data Fine</label>
                             <input type="date" name="end_date" id="end_date" class="form-control"
-                                value="{{ $project->end_date }}">
+                                value="{{ old('end_date', $project->end_date) }}">
                         </div>
                     @endif
                 @endif
@@ -54,7 +56,7 @@
                 <div class="text-white mt-3 form-group">
                     <label for="images">URL Immagini (separati da virgola)</label>
                     <input type="text" name="images" id="images" class="form-control"
-                        value="{{ implode(',', $project->images) }}">
+                        value="{{ implode(',', old('images', $project->images)) }}">
                 </div>
                 <button type="submit" class="btn btn-primary mt-3">Update Project</button>
             </form>
