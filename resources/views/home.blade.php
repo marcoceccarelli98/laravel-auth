@@ -13,7 +13,7 @@
             <div class="projects-list">
                 @foreach ($data['projects'] as $project)
                     <div class="project-card">
-                        <a href="{{ route('projects.show', $project->id) }}">
+                        <a href="{{ route('projects.show', $project->slug) }}">
                             <div class="image-container">
                                 <img src="{{ $project['images'][0] }}" alt="Thumb not found">
                             </div>

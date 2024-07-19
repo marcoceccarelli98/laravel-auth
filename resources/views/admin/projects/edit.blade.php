@@ -56,7 +56,7 @@
                 <div class="text-white mt-3 form-group">
                     <label for="images">URL Immagini (separati da virgola)</label>
                     <input type="text" name="images" id="images" class="form-control"
-                        value="{{ implode(',', old('images', $project->images)) }}">
+                        value="{{ implode(',', $project->images) }}">
                 </div>
                 <button type="submit" class="btn btn-primary mt-3">Update Project</button>
             </form>

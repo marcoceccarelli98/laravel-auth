@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 class ProjectController extends Controller
 {
@@ -38,6 +40,12 @@ class ProjectController extends Controller
 
         $data = $request->validated();
         $data['images'] = array_map('trim', explode(',', $data['images']));
+
+        Log::info('Create Title: ' . $data['title']);
+        $data['slug'] = Str::slug($data['title'], '-');
+        Log::info('Slug: ' . $data['slug']);
+
+
         Project::create($data);
 
         return redirect()->route('home');
@@ -47,8 +55,11 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Project $project)
+    public function show(string $slug)
     {
+
+        $project = Project::where('slug', $slug)->first();
+
         return view('admin.projects.show', compact('project'));
     }
 
@@ -66,7 +77,12 @@ class ProjectController extends Controller
     public function update(UpdateProjectRequest $request, Project $project)
     {
         $data = $request->validated();
+
         $data['images'] = array_map('trim', explode(',', $data['images']));
+
+        Log::info('Update Title: ' . $data['title']);
+        $data['slug'] = Str::slug($data['title'], '-');
+        Log::info('Slug: ' . $data['slug']);
 
         $project->update($data);
 
